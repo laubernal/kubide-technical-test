@@ -18,7 +18,7 @@ export class CreateUserHandler {
       body.name,
       body.email,
       body.password,
-      body.isActive,
+      true,
       new Date(),
       new Date(),
     );
