@@ -3,13 +3,24 @@ import { CreateUserController } from './Infrastructure/Controllers/User/CreateUs
 import { CreateUserHandler } from './Application/User/CreateUserHandler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UserModel } from './Infrastructure/Persistance/Models/UserModel';
+import { USERS_REPOSITORY } from './Constants';
+import { PgUserRepository } from './Infrastructure/Persistance/Repositories/PgUserRepository';
 
 const controllers = [CreateUserController];
 
 const handlers = [CreateUserHandler];
 
+const repositories = [
+  {
+    provide: USERS_REPOSITORY,
+    useClass: PgUserRepository,
+  },
+];
+
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
@@ -19,13 +30,14 @@ const handlers = [CreateUserHandler];
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [],
-        synchronize: true,
+        entities: [UserModel],
+        synchronize: false,
       }),
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([UserModel]),
   ],
   controllers: [...controllers],
-  providers: [...handlers],
+  providers: [...handlers, ...repositories],
 })
 export class AppModule {}
