@@ -1,0 +1,35 @@
+version: '3.1'
+services:
+  postgres_db:
+    container_name: kubide-db
+    restart: always
+    image: 'postgres:latest'
+    ports:
+      - '5432:5432'
+    volumes:
+      - db_data:/var/lib/postgresql/data:rw
+    environment:
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+
+  kubide:
+    container_name: kubide
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    environment:
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_URL: ${DATABASE_URL}
+    depends_on:
+      - postgres_db
+
+volumes:
+  db_data:
