@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Res } from '@nestjs/common';
+import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { KubideApiResponse } from 'src/KubideApiResponse';
 import {
@@ -10,6 +10,7 @@ import {
 import { GetUserHandler } from 'src/Application/GetUser/GetUserHandler';
 import { GetUserParams } from './GetUserParams';
 import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
+import { AuthGuard } from 'src/Infrastructure/Guard/AuthGuard';
 
 @ApiBearerAuth()
 @ApiTags('users')
@@ -17,11 +18,13 @@ import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 export class GetUserController {
   constructor(private readonly getUserHandler: GetUserHandler) {}
 
+  @UseGuards(AuthGuard)
   @Get('/api/user/:id')
   @ApiOperation({ summary: 'Get a user' })
   @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiResponse({ status: 403, description: 'Forbidden resource' })
   @ApiResponse({ status: 200, description: 'User retrieved succesfully' })
-  public async post(
+  public async get(
     @Param() params: GetUserParams,
     @Res() res: Response,
   ): Promise<Response<any, Record<string, any>>> {

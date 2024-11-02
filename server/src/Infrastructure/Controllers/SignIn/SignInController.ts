@@ -42,6 +42,7 @@ export class SignInController {
 
       const token = jwt.sign(
         {
+          id: signInResponse.id,
           name: signInResponse.name,
           email: signInResponse.email,
         },
