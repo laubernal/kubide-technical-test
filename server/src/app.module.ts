@@ -14,12 +14,14 @@ import { GetUserHandler } from './Application/GetUser/GetUserHandler';
 import { GetUserController } from './Infrastructure/Controllers/GetUser/GetUserController';
 import { UpdateUserHandler } from './Application/UpdateUser/UpdateUserHandler';
 import { UpdateUserController } from './Infrastructure/Controllers/UpdateUser/UpdateUserController';
+import { ActivateUserController } from './Infrastructure/Controllers/ActivateUser/ActivateUserController';
 
 const controllers = [
   CreateUserController,
   SignInController,
   GetUserController,
   UpdateUserController,
+  ActivateUserController,
 ];
 
 const handlers = [
