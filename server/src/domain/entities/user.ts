@@ -1,4 +1,4 @@
-import { NotAuthorizedError } from '../Errors/NotAuthorizedError';
+import { InvalidCredentialsError } from '../Errors/InvalidCredentialsError';
 import { CryptoService } from '../Services/CryptoService';
 
 export class User {
@@ -31,7 +31,7 @@ export class User {
     const valid = await crypto.compare(this._password, supplied);
 
     if (!valid) {
-      throw new NotAuthorizedError();
+      throw new InvalidCredentialsError();
     }
   }
 
