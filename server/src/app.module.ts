@@ -7,6 +7,7 @@ import { UserModel } from './Infrastructure/Persistance/Models/UserModel';
 import { USERS_REPOSITORY } from './Constants';
 import { PgUserRepository } from './Infrastructure/Persistance/Repositories/PgUserRepository';
 import { UserMapper } from './Infrastructure/Persistance/Mappers/UserMapper';
+import { CryptoService } from './Domain/Services/CryptoService';
 
 const controllers = [CreateUserController];
 
@@ -20,6 +21,8 @@ const repositories = [
 ];
 
 const mappers = [UserMapper];
+
+const services = [CryptoService];
 
 @Module({
   imports: [
@@ -41,6 +44,6 @@ const mappers = [UserMapper];
     TypeOrmModule.forFeature([UserModel]),
   ],
   controllers: [...controllers],
-  providers: [...handlers, ...repositories, ...mappers],
+  providers: [...handlers, ...repositories, ...mappers, ...services],
 })
 export class AppModule {}
