@@ -11,8 +11,9 @@ import { SignInHandler } from './Application/SignIn/SignInHandler';
 import { SignInController } from './Infrastructure/Controllers/SignIn/SignInController';
 import { CreateUserController } from './Infrastructure/Controllers/CreateUser/CreateUserController';
 import { GetUserHandler } from './Application/GetUser/GetUserHandler';
+import { GetUserController } from './Infrastructure/Controllers/GetUser/GetUserController';
 
-const controllers = [CreateUserController, SignInController];
+const controllers = [CreateUserController, SignInController, GetUserController];
 
 const handlers = [CreateUserHandler, SignInHandler, GetUserHandler];
 
