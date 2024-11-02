@@ -4,6 +4,7 @@ import { User } from 'src/Domain/Entities/User';
 import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 import { IUserRepository } from 'src/Domain/Repositories/IUserRepository';
 import { SignInResponse } from './SignInResponse';
+import { SignInDto } from './SignInDto';
 
 Injectable();
 export class SignInHandler {
@@ -11,7 +12,7 @@ export class SignInHandler {
     @Inject(USERS_REPOSITORY) private readonly repository: IUserRepository,
   ) {}
 
-  public async execute(dto: any): Promise<SignInResponse> {
+  public async execute(dto: SignInDto): Promise<SignInResponse> {
     const user = await this.findUser(dto.email);
 
     await user.checkIsAValidPassword(dto.password);
