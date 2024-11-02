@@ -3,12 +3,23 @@ import { Response } from 'express';
 import { AppResponse } from 'src/AppResponse';
 import { CreateUserRequest } from './CreateUserRequest';
 import { CreateUserHandler } from 'src/Application/User/CreateUserHandler';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('users')
 @Controller()
 export class CreateUserController {
   constructor(private readonly createUserHandler: CreateUserHandler) {}
 
   @Post('/api/auth/register')
+  @ApiOperation({ summary: 'Create a user' })
+  @ApiResponse({ status: 400, description: 'User already exists' })
+  @ApiResponse({ status: 200, description: 'User created succesfully' })
   public async post(
     @Body() body: CreateUserRequest,
     @Res() res: Response,
