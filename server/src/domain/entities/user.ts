@@ -1,4 +1,9 @@
+import { NotAuthorizedError } from '../Errors/NotAuthorizedError';
+import { CryptoService } from '../Services/CryptoService';
+
 export class User {
+  private _crypto: CryptoService = new CryptoService();
+
   public static build(
     id: string,
     name: string,
@@ -20,6 +25,14 @@ export class User {
     private readonly _createdAt: Date,
     private readonly _updatedAt: Date,
   ) {}
+
+  public async checkIsAValidPassword(supplied: string): Promise<void> {
+    const valid = await this._crypto.compare(this._password, supplied);
+
+    if (!valid) {
+      throw new NotAuthorizedError();
+    }
+  }
 
   public id(): string {
     return this._id;

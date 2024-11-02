@@ -8,10 +8,11 @@ import { USERS_REPOSITORY } from './Constants';
 import { PgUserRepository } from './Infrastructure/Persistance/Repositories/PgUserRepository';
 import { UserMapper } from './Infrastructure/Persistance/Mappers/UserMapper';
 import { CryptoService } from './Domain/Services/CryptoService';
+import { SignInHandler } from './Application/User/SignInHandler';
 
 const controllers = [CreateUserController];
 
-const handlers = [CreateUserHandler];
+const handlers = [CreateUserHandler, SignInHandler];
 
 const repositories = [
   {
