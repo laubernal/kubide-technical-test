@@ -15,6 +15,7 @@ import { GetUserController } from './Infrastructure/Controllers/GetUser/GetUserC
 import { UpdateUserHandler } from './Application/UpdateUser/UpdateUserHandler';
 import { UpdateUserController } from './Infrastructure/Controllers/UpdateUser/UpdateUserController';
 import { ActivateUserController } from './Infrastructure/Controllers/ActivateUser/ActivateUserController';
+import { GetActiveUsersHandler } from './Application/GetActiveUsers/GetActiveUsersHandler';
 
 const controllers = [
   CreateUserController,
@@ -29,6 +30,7 @@ const handlers = [
   SignInHandler,
   GetUserHandler,
   UpdateUserHandler,
+  GetActiveUsersHandler,
 ];
 
 const repositories = [
