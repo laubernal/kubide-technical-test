@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { AppResponse } from 'src/AppResponse';
+import { KubideApiResponse } from 'src/KubideApiResponse';
 import { SignInHandler } from 'src/Application/User/SignInHandler';
 import { SignInRequest } from './SignInRequest';
 import { ConfigService } from '@nestjs/config';
@@ -33,7 +33,7 @@ export class SignInController {
     try {
       const signInResponse = await this.signInHandler.execute(body);
 
-      const response = new AppResponse(null, {
+      const response = new KubideApiResponse(null, {
         success: true,
         error: null,
       });
@@ -51,7 +51,7 @@ export class SignInController {
         .setHeader('Authorization', `Bearer ${token}`)
         .json(response);
     } catch (error: any) {
-      const errorResponse = new AppResponse(null, {
+      const errorResponse = new KubideApiResponse(null, {
         success: false,
         error: error.message,
       });

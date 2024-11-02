@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { AppResponse } from 'src/AppResponse';
+import { KubideApiResponse } from 'src/KubideApiResponse';
 import { CreateUserRequest } from './CreateUserRequest';
 import { CreateUserHandler } from 'src/Application/User/CreateUserHandler';
 import {
@@ -27,14 +27,14 @@ export class CreateUserController {
     try {
       await this.createUserHandler.execute(body);
 
-      const response = new AppResponse(null, {
+      const response = new KubideApiResponse(null, {
         success: true,
         error: null,
       });
 
       return res.status(200).json(response);
     } catch (error: any) {
-      const errorResponse = new AppResponse(null, {
+      const errorResponse = new KubideApiResponse(null, {
         success: false,
         error: error.message,
       });
