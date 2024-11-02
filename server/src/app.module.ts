@@ -18,6 +18,7 @@ import { ActivateUserController } from './Infrastructure/Controllers/ActivateUse
 import { GetActiveUsersHandler } from './Application/GetActiveUsers/GetActiveUsersHandler';
 import { GetActiveUsersController } from './Infrastructure/Controllers/GetActiveUsers/GetActiveUsersController';
 import { SaveMessageHandler } from './Application/SaveMessage/SaveMessageHandler';
+import { SaveMessageController } from './Infrastructure/Controllers/SaveMessage/SaveMessageController';
 
 const controllers = [
   CreateUserController,
@@ -26,6 +27,7 @@ const controllers = [
   UpdateUserController,
   ActivateUserController,
   GetActiveUsersController,
+  SaveMessageController,
 ];
 
 const handlers = [
@@ -34,7 +36,7 @@ const handlers = [
   GetUserHandler,
   UpdateUserHandler,
   GetActiveUsersHandler,
-  SaveMessageHandler
+  SaveMessageHandler,
 ];
 
 const repositories = [
