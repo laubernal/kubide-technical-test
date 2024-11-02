@@ -9,8 +9,9 @@ import { PgUserRepository } from './Infrastructure/Persistance/Repositories/PgUs
 import { UserMapper } from './Infrastructure/Persistance/Mappers/UserMapper';
 import { CryptoService } from './Domain/Services/CryptoService';
 import { SignInHandler } from './Application/User/SignInHandler';
+import { SignInController } from './Infrastructure/Controllers/User/SignInController';
 
-const controllers = [CreateUserController];
+const controllers = [CreateUserController, SignInController];
 
 const handlers = [CreateUserHandler, SignInHandler];
 
