@@ -4,6 +4,7 @@ import { User } from 'src/Domain/Entities/User';
 import { UserAlreadyExistsError } from 'src/Domain/Errors/UserAlreadyExists';
 import { IUserRepository } from 'src/Domain/Repositories/IUserRepository';
 import { CryptoService } from 'src/Domain/Services/CryptoService';
+import { CreateUserDto } from './CreateUserDto';
 
 @Injectable()
 export class CreateUserHandler {
@@ -12,14 +13,14 @@ export class CreateUserHandler {
     private readonly crypto: CryptoService,
   ) {}
 
-  public async execute(body: any): Promise<void> {
-    await this.ensureEmailIsNotUsed(body.email);
-    const hashedPassword = await this.crypto.hash(body.password);
+  public async execute(dto: CreateUserDto): Promise<void> {
+    await this.ensureEmailIsNotUsed(dto.email);
+    const hashedPassword = await this.crypto.hash(dto.password);
 
     const newUser = User.build(
-      body.id,
-      body.name,
-      body.email,
+      dto.id,
+      dto.name,
+      dto.email,
       hashedPassword,
       true,
       new Date(),

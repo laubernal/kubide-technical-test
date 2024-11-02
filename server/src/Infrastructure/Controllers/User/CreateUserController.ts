@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { AppResponse } from 'src/AppResponse';
-import { CreateUserDto } from './CreateUserDto';
+import { CreateUserRequest } from './CreateUserRequest';
 import { CreateUserHandler } from 'src/Application/User/CreateUserHandler';
 
 @Controller()
@@ -10,7 +10,7 @@ export class CreateUserController {
 
   @Post('/api/auth/register')
   public async post(
-    @Body() body: CreateUserDto,
+    @Body() body: CreateUserRequest,
     @Res() res: Response,
   ): Promise<Response<any, Record<string, any>>> {
     try {
