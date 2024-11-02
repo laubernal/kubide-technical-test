@@ -5,7 +5,15 @@ import { SignInHandler } from 'src/Application/User/SignInHandler';
 import { SignInRequest } from './SignInRequest';
 import { ConfigService } from '@nestjs/config';
 import * as jwt from 'jsonwebtoken';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
+@ApiBearerAuth()
+@ApiTags('users')
 @Controller()
 export class SignInController {
   constructor(
@@ -14,6 +22,10 @@ export class SignInController {
   ) {}
 
   @Post('/api/auth/signin')
+  @ApiOperation({ summary: 'Sign in' })
+  @ApiResponse({ status: 404, description: 'User not found' })
+  @ApiResponse({ status: 400, description: 'Invalid credentials' })
+  @ApiResponse({ status: 200, description: 'Signed in succesfully' })
   public async post(
     @Body() body: SignInRequest,
     @Res() res: Response,
