@@ -11,6 +11,8 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
+import { InvalidCredentialsError } from 'src/Domain/Errors/InvalidCredentialsError';
 
 @ApiBearerAuth()
 @ApiTags('users')
@@ -56,7 +58,17 @@ export class SignInController {
         error: error.message,
       });
 
-      return res.status(400).json(errorResponse);
+      let statusCode = 400;
+
+      if (error instanceof RecordNotFoundError) {
+        statusCode = 404;
+      }
+
+      if (error instanceof InvalidCredentialsError) {
+        statusCode = 400;
+      }
+
+      return res.status(statusCode).json(errorResponse);
     }
   }
 }

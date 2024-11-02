@@ -9,6 +9,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { UserAlreadyExistsError } from 'src/Domain/Errors/UserAlreadyExists';
 
 @ApiBearerAuth()
 @ApiTags('users')
@@ -39,7 +40,13 @@ export class CreateUserController {
         error: error.message,
       });
 
-      return res.status(400).json(errorResponse);
+      let statusCode = 400;
+
+      if (error instanceof UserAlreadyExistsError) {
+        statusCode = 400;
+      }
+
+      return res.status(statusCode).json(errorResponse);
     }
   }
 }
