@@ -13,8 +13,14 @@ import { CreateUserController } from './Infrastructure/Controllers/CreateUser/Cr
 import { GetUserHandler } from './Application/GetUser/GetUserHandler';
 import { GetUserController } from './Infrastructure/Controllers/GetUser/GetUserController';
 import { UpdateUserHandler } from './Application/UpdateUser/UpdateUserHandler';
+import { UpdateUserController } from './Infrastructure/Controllers/UpdateUser/UpdateUserController';
 
-const controllers = [CreateUserController, SignInController, GetUserController];
+const controllers = [
+  CreateUserController,
+  SignInController,
+  GetUserController,
+  UpdateUserController,
+];
 
 const handlers = [
   CreateUserHandler,
