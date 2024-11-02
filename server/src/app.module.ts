@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModel } from './Infrastructure/Persistance/Models/UserModel';
 import { USERS_REPOSITORY } from './Constants';
 import { PgUserRepository } from './Infrastructure/Persistance/Repositories/PgUserRepository';
+import { UserMapper } from './Infrastructure/Persistance/Mappers/UserMapper';
 
 const controllers = [CreateUserController];
 
@@ -17,6 +18,8 @@ const repositories = [
     useClass: PgUserRepository,
   },
 ];
+
+const mappers = [UserMapper];
 
 @Module({
   imports: [
@@ -38,6 +41,6 @@ const repositories = [
     TypeOrmModule.forFeature([UserModel]),
   ],
   controllers: [...controllers],
-  providers: [...handlers, ...repositories],
+  providers: [...handlers, ...repositories, ...mappers],
 })
 export class AppModule {}

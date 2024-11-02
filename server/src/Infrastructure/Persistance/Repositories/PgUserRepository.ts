@@ -4,12 +4,14 @@ import { User } from 'src/Domain/Entities/User';
 import { IUserRepository } from 'src/Domain/Repositories/IUserRepository';
 import { UserModel } from '../Models/UserModel';
 import { Repository } from 'typeorm';
+import { UserMapper } from '../Mappers/UserMapper';
 
 @Injectable()
 export class PgUserRepository implements IUserRepository {
   constructor(
     @InjectRepository(UserModel)
     private readonly usersRepository: Repository<UserModel>,
+    private readonly mapper: UserMapper,
   ) {}
 
   public async findByEmail(email: string): Promise<User | undefined> {
@@ -19,15 +21,7 @@ export class PgUserRepository implements IUserRepository {
       return undefined;
     }
 
-    return User.build(
-      model.id,
-      model.name,
-      model.email,
-      model.password,
-      model.isActive,
-      model.createdAt,
-      model.updatedAt,
-    );
+    return this.mapper.toDomain(model);
   }
 
   public async findById(id: string): Promise<User | undefined> {
@@ -37,15 +31,7 @@ export class PgUserRepository implements IUserRepository {
       return undefined;
     }
 
-    return User.build(
-      model.id,
-      model.name,
-      model.email,
-      model.password,
-      model.isActive,
-      model.createdAt,
-      model.updatedAt,
-    );
+    return this.mapper.toDomain(model);
   }
 
   public async findActiveUsers(): Promise<User[]> {
