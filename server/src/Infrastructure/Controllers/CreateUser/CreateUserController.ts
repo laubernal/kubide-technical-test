@@ -10,9 +10,10 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { UserAlreadyExistsError } from 'src/Domain/Errors/UserAlreadyExists';
+import { AUTH_SWAGGER_TAG } from 'src/Constants';
 
 @ApiBearerAuth()
-@ApiTags('users')
+@ApiTags(AUTH_SWAGGER_TAG)
 @Controller()
 export class CreateUserController {
   constructor(private readonly createUserHandler: CreateUserHandler) {}

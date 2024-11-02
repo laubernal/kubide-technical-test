@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AUTH_SWAGGER_TAG, USERS_SWAGGER_TAG } from './Constants';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,8 +10,8 @@ async function bootstrap() {
     .setTitle('Kubide technical test swagger documentation')
     .setDescription('API for the app')
     .setVersion('1.0')
-    .addTag('users')
-    .addBearerAuth()
+    .addTag(AUTH_SWAGGER_TAG)
+    .addTag(USERS_SWAGGER_TAG)
     .build();
 
   const document = SwaggerModule.createDocument(app, options);

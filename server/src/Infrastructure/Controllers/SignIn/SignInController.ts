@@ -13,9 +13,10 @@ import {
 } from '@nestjs/swagger';
 import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 import { InvalidCredentialsError } from 'src/Domain/Errors/InvalidCredentialsError';
+import { AUTH_SWAGGER_TAG } from 'src/Constants';
 
 @ApiBearerAuth()
-@ApiTags('users')
+@ApiTags(AUTH_SWAGGER_TAG)
 @Controller()
 export class SignInController {
   constructor(
