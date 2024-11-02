@@ -16,6 +16,7 @@ import { UpdateUserHandler } from './Application/UpdateUser/UpdateUserHandler';
 import { UpdateUserController } from './Infrastructure/Controllers/UpdateUser/UpdateUserController';
 import { ActivateUserController } from './Infrastructure/Controllers/ActivateUser/ActivateUserController';
 import { GetActiveUsersHandler } from './Application/GetActiveUsers/GetActiveUsersHandler';
+import { GetActiveUsersController } from './Infrastructure/Controllers/GetActiveUsers/GetActiveUsersController';
 
 const controllers = [
   CreateUserController,
@@ -23,6 +24,7 @@ const controllers = [
   GetUserController,
   UpdateUserController,
   ActivateUserController,
+  GetActiveUsersController,
 ];
 
 const handlers = [
