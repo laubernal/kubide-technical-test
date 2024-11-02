@@ -10,10 +10,11 @@ import { CryptoService } from './Domain/Services/CryptoService';
 import { SignInHandler } from './Application/SignIn/SignInHandler';
 import { SignInController } from './Infrastructure/Controllers/SignIn/SignInController';
 import { CreateUserController } from './Infrastructure/Controllers/CreateUser/CreateUserController';
+import { GetUserHandler } from './Application/GetUser/GetUserHandler';
 
 const controllers = [CreateUserController, SignInController];
 
-const handlers = [CreateUserHandler, SignInHandler];
+const handlers = [CreateUserHandler, SignInHandler, GetUserHandler];
 
 const repositories = [
   {
