@@ -17,7 +17,7 @@ export class CreateUserHandler {
     await this.ensureEmailIsNotUsed(dto.email);
     const hashedPassword = await this.crypto.hash(dto.password);
 
-    const newUser = User.build(
+    const newUser = new User(
       dto.id,
       dto.name,
       dto.email,

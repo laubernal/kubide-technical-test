@@ -17,7 +17,7 @@ export class UserMapper {
   }
 
   public toDomain(model: UserModel): User {
-    return User.build(
+    return new User(
       model.id,
       model.name,
       model.email,

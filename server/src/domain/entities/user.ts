@@ -2,18 +2,6 @@ import { InvalidCredentialsError } from '../Errors/InvalidCredentialsError';
 import { CryptoService } from '../Services/CryptoService';
 
 export class User {
-  public static build(
-    id: string,
-    name: string,
-    email: string,
-    password: string,
-    isActive: boolean,
-    createdAt: Date,
-    updatedAt: Date,
-  ): User {
-    return new User(id, name, email, password, isActive, createdAt, updatedAt);
-  }
-
   constructor(
     private readonly _id: string,
     private readonly _name: string,
