@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { KubideApiResponse } from 'src/KubideApiResponse';
-import { SignInHandler } from 'src/Application/User/SignInHandler';
+import { SignInHandler } from 'src/Application/SignIn/SignInHandler';
 import { SignInRequest } from './SignInRequest';
 import { ConfigService } from '@nestjs/config';
 import * as jwt from 'jsonwebtoken';

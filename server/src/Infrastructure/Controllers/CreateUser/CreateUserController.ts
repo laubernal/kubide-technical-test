@@ -2,7 +2,7 @@ import { Body, Controller, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { KubideApiResponse } from 'src/KubideApiResponse';
 import { CreateUserRequest } from './CreateUserRequest';
-import { CreateUserHandler } from 'src/Application/User/CreateUserHandler';
+import { CreateUserHandler } from 'src/Application/CreateUser/CreateUserHandler';
 import {
   ApiBearerAuth,
   ApiOperation,

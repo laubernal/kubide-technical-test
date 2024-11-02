@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CreateUserController } from './Infrastructure/Controllers/User/CreateUserController';
-import { CreateUserHandler } from './Application/User/CreateUserHandler';
+import { CreateUserHandler } from './Application/CreateUser/CreateUserHandler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModel } from './Infrastructure/Persistance/Models/UserModel';
@@ -8,8 +7,9 @@ import { USERS_REPOSITORY } from './Constants';
 import { PgUserRepository } from './Infrastructure/Persistance/Repositories/PgUserRepository';
 import { UserMapper } from './Infrastructure/Persistance/Mappers/UserMapper';
 import { CryptoService } from './Domain/Services/CryptoService';
-import { SignInHandler } from './Application/User/SignInHandler';
-import { SignInController } from './Infrastructure/Controllers/User/SignInController';
+import { SignInHandler } from './Application/SignIn/SignInHandler';
+import { SignInController } from './Infrastructure/Controllers/SignIn/SignInController';
+import { CreateUserController } from './Infrastructure/Controllers/CreateUser/CreateUserController';
 
 const controllers = [CreateUserController, SignInController];
 
