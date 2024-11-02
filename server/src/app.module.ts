@@ -12,10 +12,16 @@ import { SignInController } from './Infrastructure/Controllers/SignIn/SignInCont
 import { CreateUserController } from './Infrastructure/Controllers/CreateUser/CreateUserController';
 import { GetUserHandler } from './Application/GetUser/GetUserHandler';
 import { GetUserController } from './Infrastructure/Controllers/GetUser/GetUserController';
+import { UpdateUserHandler } from './Application/UpdateUser/UpdateUserHandler';
 
 const controllers = [CreateUserController, SignInController, GetUserController];
 
-const handlers = [CreateUserHandler, SignInHandler, GetUserHandler];
+const handlers = [
+  CreateUserHandler,
+  SignInHandler,
+  GetUserHandler,
+  UpdateUserHandler,
+];
 
 const repositories = [
   {
