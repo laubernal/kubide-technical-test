@@ -5,17 +5,19 @@ import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 import { IUserRepository } from 'src/Domain/Repositories/IUserRepository';
 import { SignInResponse } from './SignInResponse';
 import { SignInDto } from './SignInDto';
+import { CryptoService } from 'src/Domain/Services/CryptoService';
 
 Injectable();
 export class SignInHandler {
   constructor(
     @Inject(USERS_REPOSITORY) private readonly repository: IUserRepository,
+    private readonly crypto: CryptoService,
   ) {}
 
   public async execute(dto: SignInDto): Promise<SignInResponse> {
     const user = await this.findUser(dto.email);
 
-    await user.checkIsAValidPassword(dto.password);
+    await user.checkIsAValidPassword(this.crypto, dto.password);
 
     return SignInResponse.fromDomain(user);
   }
