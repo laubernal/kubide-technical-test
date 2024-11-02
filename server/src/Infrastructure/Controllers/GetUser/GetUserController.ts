@@ -11,15 +11,16 @@ import { GetUserHandler } from 'src/Application/GetUser/GetUserHandler';
 import { GetUserParams } from './GetUserParams';
 import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 import { AuthGuard } from 'src/Infrastructure/Guard/AuthGuard';
+import { USERS_SWAGGER_TAG } from 'src/Constants';
 
 @ApiBearerAuth()
-@ApiTags('users')
+@ApiTags(USERS_SWAGGER_TAG)
 @Controller()
 export class GetUserController {
   constructor(private readonly getUserHandler: GetUserHandler) {}
 
   @UseGuards(AuthGuard)
-  @Get('/api/user/:id')
+  @Get('/api/users/:id')
   @ApiOperation({ summary: 'Get a user' })
   @ApiResponse({ status: 404, description: 'User not found' })
   @ApiResponse({ status: 403, description: 'Forbidden resource' })

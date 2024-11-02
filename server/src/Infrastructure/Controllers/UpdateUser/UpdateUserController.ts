@@ -12,15 +12,16 @@ import { UpdateUserRequest } from './UpdateUserRequest';
 import { UpdateUserHandler } from 'src/Application/UpdateUser/UpdateUserHandler';
 import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 import { UpdateUserParams } from './UpdateUserParams';
+import { USERS_SWAGGER_TAG } from 'src/Constants';
 
 @ApiBearerAuth()
-@ApiTags('users')
+@ApiTags(USERS_SWAGGER_TAG)
 @Controller()
 export class UpdateUserController {
   constructor(private readonly updateUserHandler: UpdateUserHandler) {}
 
   @UseGuards(AuthGuard)
-  @Put('/api/user/:id')
+  @Put('/api/users/:id')
   @ApiOperation({ summary: 'Update a user' })
   @ApiResponse({ status: 404, description: 'Record not found' })
   @ApiResponse({ status: 403, description: 'Forbidden resource' })
