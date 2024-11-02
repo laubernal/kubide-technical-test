@@ -35,15 +35,22 @@ export class PgUserRepository implements IUserRepository {
   }
 
   public async findActiveUsers(): Promise<User[]> {
-    throw new Error('Method not implemented.');
+    const models = await this.usersRepository.findBy({ isActive: true });
+
+    return models.map((model: UserModel) => {
+      return this.mapper.toDomain(model);
+    });
   }
 
   public async save(entity: User): Promise<void> {
-    console.log('ENTITY TO SAVE', entity);
-    throw new Error('Method not implemented.');
+    const model = this.mapper.toModel(entity);
+
+    await this.usersRepository.save(model);
   }
 
   public async update(entity: User): Promise<void> {
-    throw new Error('Method not implemented.');
+    const model = this.mapper.toModel(entity);
+
+    await this.usersRepository.update({ id: entity.id() }, model);
   }
 }
