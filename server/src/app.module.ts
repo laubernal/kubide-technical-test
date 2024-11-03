@@ -3,7 +3,7 @@ import { CreateUserHandler } from './Application/CreateUser/CreateUserHandler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModel } from './Infrastructure/Persistance/Models/UserModel';
-import { USERS_REPOSITORY } from './Constants';
+import { MESSAGES_REPOSITORY, USERS_REPOSITORY } from './Constants';
 import { PgUserRepository } from './Infrastructure/Persistance/Repositories/PgUserRepository';
 import { UserMapper } from './Infrastructure/Persistance/Mappers/UserMapper';
 import { CryptoService } from './Domain/Services/CryptoService';
@@ -20,6 +20,8 @@ import { GetActiveUsersController } from './Infrastructure/Controllers/GetActive
 import { SaveMessageHandler } from './Application/SaveMessage/SaveMessageHandler';
 import { SaveMessageController } from './Infrastructure/Controllers/SaveMessage/SaveMessageController';
 import { MessageModel } from './Infrastructure/Persistance/Models/MessageModel';
+import { PgMessageRepository } from './Infrastructure/Persistance/Repositories/PgMessageRepository';
+import { MessageMapper } from './Infrastructure/Persistance/Mappers/MessageMapper';
 
 const controllers = [
   CreateUserController,
@@ -45,9 +47,13 @@ const repositories = [
     provide: USERS_REPOSITORY,
     useClass: PgUserRepository,
   },
+  {
+    provide: MESSAGES_REPOSITORY,
+    useClass: PgMessageRepository,
+  },
 ];
 
-const mappers = [UserMapper];
+const mappers = [UserMapper, MessageMapper];
 
 const services = [CryptoService];
 
@@ -68,7 +74,7 @@ const services = [CryptoService];
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([UserModel]),
+    TypeOrmModule.forFeature([UserModel, MessageModel]),
   ],
   controllers: [...controllers],
   providers: [...handlers, ...repositories, ...mappers, ...services],
