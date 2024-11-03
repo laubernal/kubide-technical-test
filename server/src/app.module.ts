@@ -19,6 +19,7 @@ import { GetActiveUsersHandler } from './Application/GetActiveUsers/GetActiveUse
 import { GetActiveUsersController } from './Infrastructure/Controllers/GetActiveUsers/GetActiveUsersController';
 import { SaveMessageHandler } from './Application/SaveMessage/SaveMessageHandler';
 import { SaveMessageController } from './Infrastructure/Controllers/SaveMessage/SaveMessageController';
+import { MessageModel } from './Infrastructure/Persistance/Models/MessageModel';
 
 const controllers = [
   CreateUserController,
@@ -62,7 +63,7 @@ const services = [CryptoService];
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [UserModel],
+        entities: [UserModel, MessageModel],
         synchronize: false,
       }),
       inject: [ConfigService],

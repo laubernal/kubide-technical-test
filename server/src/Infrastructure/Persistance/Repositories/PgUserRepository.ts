@@ -35,7 +35,7 @@ export class PgUserRepository implements IUserRepository {
   }
 
   public async findActiveUsers(): Promise<User[]> {
-    const models = await this.usersRepository.findBy({ isActive: true });
+    const models = await this.usersRepository.findBy({ is_active: true });
 
     return models.map((model: UserModel) => {
       return this.mapper.toDomain(model);

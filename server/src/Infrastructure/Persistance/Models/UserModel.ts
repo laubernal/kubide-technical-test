@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { MessageModel } from './MessageModel';
 
 @Entity({ name: 'users' })
 export class UserModel {
@@ -27,7 +28,13 @@ export class UserModel {
   password!: string;
 
   @Column({ name: 'us_is_active' })
-  isActive!: boolean;
+  is_active!: boolean;
+
+  @OneToMany(() => MessageModel, (message) => message.sender)
+  sent_messages: MessageModel[];
+
+  @OneToMany(() => MessageModel, (message) => message.receiver)
+  received_messages: MessageModel[];
 
   @Column({ name: 'us_created_at', type: 'timestamp', precision: 0 })
   createdAt!: Date;

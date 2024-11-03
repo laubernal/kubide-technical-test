@@ -9,7 +9,7 @@ export class UserMapper {
     model.name = entity.name();
     model.email = entity.email();
     model.password = entity.password();
-    model.isActive = entity.isActive();
+    model.is_active = entity.isActive();
     model.createdAt = entity.createdAt();
     model.updatedAt = entity.updatedAt();
 
@@ -22,7 +22,7 @@ export class UserMapper {
       model.name,
       model.email,
       model.password,
-      model.isActive,
+      model.is_active,
       model.createdAt,
       model.updatedAt,
     );
