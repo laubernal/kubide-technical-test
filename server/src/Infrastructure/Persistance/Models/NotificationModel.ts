@@ -8,7 +8,7 @@ export class NotificationModel {
   })
   id!: string;
 
-  @Column({ name: 'no_messsage_id' })
+  @Column({ name: 'no_message_id' })
   message: string;
 
   @Column({ name: 'no_receiver_id' })
