@@ -10,7 +10,9 @@ COPY ./server/tsconfig*.json .
 
 COPY ./server/nest-cli.json .
 
-COPY ./server/src ./src
+COPY ./server/src src
+
+COPY ./server/.env src/
 
 RUN npm run build
 
