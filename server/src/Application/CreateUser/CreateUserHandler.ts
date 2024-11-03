@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { USERS_REPOSITORY } from 'src/Constants';
 import { User } from 'src/Domain/Entities/User';
-import { UserAlreadyExistsError } from 'src/Domain/Errors/UserAlreadyExists';
 import { IUserRepository } from 'src/Domain/Repositories/IUserRepository';
 import { CryptoService } from 'src/Domain/Services/CryptoService';
 import { CreateUserDto } from './CreateUserDto';
+import { UserAlreadyExistsError } from 'src/Domain/Errors/UserAlreadyExists';
 
 @Injectable()
 export class CreateUserHandler {

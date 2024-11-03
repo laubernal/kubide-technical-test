@@ -4,10 +4,10 @@ import { IMessageRepository } from 'src/Domain/Repositories/IMessageRepository';
 import { SaveMessageDto } from './SaveMessageDto';
 import { GetUserResponse } from '../GetUser/GetUserResponse';
 import { GetUserHandler } from '../GetUser/GetUserHandler';
-import { UnableToSendMessageToInactiveUserError } from 'src/Domain/Errors/UnableToSendMessageToInactiveUserError';
 import { Message } from 'src/Domain/Entities/Message';
 import { SaveNotificationHandler } from '../SaveNotification/SaveNotificationHandler';
 import { UuidService } from 'src/Domain/Services/UuidService';
+import { UnableToSendMessageToInactiveUserError } from 'src/Domain/Errors/UnableToSendMessageToInactiveUserError';
 
 @Injectable()
 export class SaveMessageHandler {

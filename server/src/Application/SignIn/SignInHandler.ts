@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { USERS_REPOSITORY } from 'src/Constants';
 import { User } from 'src/Domain/Entities/User';
-import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 import { IUserRepository } from 'src/Domain/Repositories/IUserRepository';
 import { SignInResponse } from './SignInResponse';
 import { SignInDto } from './SignInDto';
 import { CryptoService } from 'src/Domain/Services/CryptoService';
+import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 
 Injectable();
 export class SignInHandler {

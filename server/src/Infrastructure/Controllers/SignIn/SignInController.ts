@@ -11,9 +11,9 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
-import { InvalidCredentialsError } from 'src/Domain/Errors/InvalidCredentialsError';
 import { AUTH_SWAGGER_TAG } from 'src/Constants';
+import { InvalidCredentialsError } from 'src/Domain/Errors/InvalidCredentialsError';
+import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 
 @ApiBearerAuth()
 @ApiTags(AUTH_SWAGGER_TAG)
@@ -27,7 +27,10 @@ export class SignInController {
   @Post('/api/auth/signin')
   @ApiOperation({ summary: 'Sign in' })
   @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
-  @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Invalid credentials' })
+  @ApiResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Invalid credentials',
+  })
   @ApiResponse({ status: HttpStatus.OK, description: 'Signed in succesfully' })
   public async post(
     @Body() body: SignInRequest,

@@ -9,8 +9,8 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { UserAlreadyExistsError } from 'src/Domain/Errors/UserAlreadyExists';
 import { AUTH_SWAGGER_TAG } from 'src/Constants';
+import { UserAlreadyExistsError } from 'src/Domain/Errors/UserAlreadyExists';
 
 @ApiBearerAuth()
 @ApiTags(AUTH_SWAGGER_TAG)

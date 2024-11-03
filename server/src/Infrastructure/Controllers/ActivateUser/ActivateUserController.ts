@@ -1,4 +1,12 @@
-import { Body, Controller, HttpCode, HttpStatus, Param, Put, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpStatus,
+  Param,
+  Put,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { KubideApiResponse } from 'src/KubideApiResponse';
 import {
@@ -9,10 +17,10 @@ import {
 } from '@nestjs/swagger';
 import { AuthGuard } from 'src/Infrastructure/Guard/AuthGuard';
 import { UpdateUserHandler } from 'src/Application/UpdateUser/UpdateUserHandler';
-import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 import { ActivateUserParams } from './ActivateUserParams';
 import { ActivateUserRequest } from './ActivateUserRequest';
 import { USERS_SWAGGER_TAG } from 'src/Constants';
+import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 
 @ApiBearerAuth()
 @ApiTags(USERS_SWAGGER_TAG)
@@ -23,8 +31,14 @@ export class ActivateUserController {
   @UseGuards(AuthGuard)
   @Put('/api/users/:id/active')
   @ApiOperation({ summary: 'Change the active state of a user' })
-  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'Record not found' })
-  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden resource' })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Record not found',
+  })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource',
+  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'User active state changed succesfully',

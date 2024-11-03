@@ -1,11 +1,8 @@
 import {
   Controller,
   Get,
-  Head,
-  Headers,
   HttpStatus,
   Param,
-  Req,
   Res,
   UseGuards,
 } from '@nestjs/common';
@@ -33,7 +30,10 @@ export class GetNotificationsController {
   @UseGuards(AuthGuard)
   @Get('/api/notifications/:userId')
   @ApiOperation({ summary: 'Get notifications from a user' })
-  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden resource' })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource',
+  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Notifications retrieved succesfully',

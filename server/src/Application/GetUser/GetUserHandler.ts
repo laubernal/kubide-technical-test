@@ -3,8 +3,8 @@ import { USERS_REPOSITORY } from 'src/Constants';
 import { IUserRepository } from 'src/Domain/Repositories/IUserRepository';
 import { GetUserDto } from './GetUserDto';
 import { GetUserResponse } from './GetUserResponse';
-import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 import { User } from 'src/Domain/Entities/User';
+import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 
 @Injectable()
 export class GetUserHandler {

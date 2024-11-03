@@ -10,9 +10,9 @@ import {
 import { AuthGuard } from 'src/Infrastructure/Guard/AuthGuard';
 import { UpdateUserRequest } from './UpdateUserRequest';
 import { UpdateUserHandler } from 'src/Application/UpdateUser/UpdateUserHandler';
-import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 import { UpdateUserParams } from './UpdateUserParams';
 import { USERS_SWAGGER_TAG } from 'src/Constants';
+import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 
 @ApiBearerAuth()
 @ApiTags(USERS_SWAGGER_TAG)

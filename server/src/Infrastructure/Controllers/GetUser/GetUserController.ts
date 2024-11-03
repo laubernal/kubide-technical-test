@@ -16,9 +16,9 @@ import {
 } from '@nestjs/swagger';
 import { GetUserHandler } from 'src/Application/GetUser/GetUserHandler';
 import { GetUserParams } from './GetUserParams';
-import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 import { AuthGuard } from 'src/Infrastructure/Guard/AuthGuard';
 import { USERS_SWAGGER_TAG } from 'src/Constants';
+import { RecordNotFoundError } from 'src/Domain/Errors/RecordNotFoundError';
 
 @ApiBearerAuth()
 @ApiTags(USERS_SWAGGER_TAG)
