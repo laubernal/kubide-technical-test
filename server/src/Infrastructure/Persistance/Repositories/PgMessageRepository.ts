@@ -14,8 +14,12 @@ export class PgMessageRepository implements IMessageRepository {
     private readonly mapper: MessageMapper,
   ) {}
 
-  public async findByReceiverId(id: string): Promise<Message[]> {
-    const models = await this.messagesRepository.findBy({ receiver: id });
+  public async findByUserId(id: string): Promise<Message[]> {
+    const models = await this.messagesRepository
+      .createQueryBuilder('messages')
+      .where('messages.sender = :id', { id })
+      .orWhere('messages.receiver = :id', { id })
+      .getMany();
 
     return models.map((model: MessageModel) => {
       return this.mapper.toDomain(model);

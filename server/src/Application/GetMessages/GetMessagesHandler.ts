@@ -13,7 +13,7 @@ export class GetMessagesHandler {
   ) {}
 
   public async execute(dto: GetMessagesDto): Promise<GetMessagesResponse[]> {
-    const messages = await this.getMessages(dto.receiverId);
+    const messages = await this.getMessages(dto.userId);
 
     const response = messages.map((message: Message) => {
       return GetMessagesResponse.fromDomain(message);
@@ -22,7 +22,7 @@ export class GetMessagesHandler {
     return response;
   }
 
-  private async getMessages(receiverId: string): Promise<Message[]> {
-    return this.repository.findByReceiverId(receiverId);
+  private async getMessages(userId: string): Promise<Message[]> {
+    return this.repository.findByUserId(userId);
   }
 }

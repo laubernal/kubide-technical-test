@@ -1,3 +1,3 @@
 export interface GetMessagesDto {
-  receiverId: string;
+  userId: string;
 }
