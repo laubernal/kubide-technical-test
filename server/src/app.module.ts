@@ -26,6 +26,7 @@ import { GetMessagesHandler } from './Application/GetMessages/GetMessagesHandler
 import { GetMessagesController } from './Infrastructure/Controllers/GetMessages/GetMessagesController';
 import { SaveNotificationHandler } from './Application/SaveNotification/SaveNotificationHandler';
 import { UuidService } from './Domain/Services/UuidService';
+import { GetNotificationsHandler } from './Application/GetNotifications/GetNotificationsHandler';
 
 const controllers = [
   CreateUserController,
@@ -47,6 +48,7 @@ const handlers = [
   SaveMessageHandler,
   GetMessagesHandler,
   SaveNotificationHandler,
+  GetNotificationsHandler,
 ];
 
 const repositories = [
