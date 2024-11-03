@@ -24,6 +24,7 @@ import { PgMessageRepository } from './Infrastructure/Persistance/Repositories/P
 import { MessageMapper } from './Infrastructure/Persistance/Mappers/MessageMapper';
 import { GetMessagesHandler } from './Application/GetMessages/GetMessagesHandler';
 import { GetMessagesController } from './Infrastructure/Controllers/GetMessages/GetMessagesController';
+import { SaveNotificationHandler } from './Application/SaveNotification/SaveNotificationHandler';
 
 const controllers = [
   CreateUserController,
@@ -44,6 +45,7 @@ const handlers = [
   GetActiveUsersHandler,
   SaveMessageHandler,
   GetMessagesHandler,
+  SaveNotificationHandler,
 ];
 
 const repositories = [
