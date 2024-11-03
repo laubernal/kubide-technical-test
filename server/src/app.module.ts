@@ -3,7 +3,11 @@ import { CreateUserHandler } from './Application/CreateUser/CreateUserHandler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModel } from './Infrastructure/Persistance/Models/UserModel';
-import { MESSAGES_REPOSITORY, USERS_REPOSITORY } from './Constants';
+import {
+  MESSAGES_REPOSITORY,
+  NOTIFICATIONS_REPOSITORY,
+  USERS_REPOSITORY,
+} from './Constants';
 import { PgUserRepository } from './Infrastructure/Persistance/Repositories/PgUserRepository';
 import { UserMapper } from './Infrastructure/Persistance/Mappers/UserMapper';
 import { CryptoService } from './Domain/Services/CryptoService';
@@ -30,6 +34,7 @@ import { GetNotificationsHandler } from './Application/GetNotifications/GetNotif
 import { GetNotificationsController } from './Infrastructure/Controllers/GetNotifications/GetNotificationsController';
 import { NotificationModel } from './Infrastructure/Persistance/Models/NotificationModel';
 import { NotificationMapper } from './Infrastructure/Persistance/Mappers/NotificationMapper';
+import { PgNotificationRepository } from './Infrastructure/Persistance/Repositories/PgNotificationRepository';
 
 const controllers = [
   CreateUserController,
@@ -63,6 +68,10 @@ const repositories = [
   {
     provide: MESSAGES_REPOSITORY,
     useClass: PgMessageRepository,
+  },
+  {
+    provide: NOTIFICATIONS_REPOSITORY,
+    useClass: PgNotificationRepository,
   },
 ];
 
