@@ -28,6 +28,7 @@ import { SaveNotificationHandler } from './Application/SaveNotification/SaveNoti
 import { UuidService } from './Domain/Services/UuidService';
 import { GetNotificationsHandler } from './Application/GetNotifications/GetNotificationsHandler';
 import { GetNotificationsController } from './Infrastructure/Controllers/GetNotifications/GetNotificationsController';
+import { NotificationModel } from './Infrastructure/Persistance/Models/NotificationModel';
 
 const controllers = [
   CreateUserController,
@@ -38,7 +39,7 @@ const controllers = [
   GetActiveUsersController,
   SaveMessageController,
   GetMessagesController,
-  GetNotificationsController
+  GetNotificationsController,
 ];
 
 const handlers = [
@@ -68,6 +69,8 @@ const mappers = [UserMapper, MessageMapper];
 
 const services = [CryptoService, UuidService];
 
+const models = [UserModel, MessageModel, NotificationModel];
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -80,13 +83,13 @@ const services = [CryptoService, UuidService];
         username: configService.get('DATABASE_USER'),
         password: configService.get('DATABASE_PASSWORD'),
         database: configService.get('DATABASE_NAME'),
-        entities: [UserModel, MessageModel],
+        entities: models,
         synchronize: false,
         logging: false,
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forFeature([UserModel, MessageModel]),
+    TypeOrmModule.forFeature(models),
   ],
   controllers: [...controllers],
   providers: [...handlers, ...repositories, ...mappers, ...services],
