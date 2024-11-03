@@ -2,6 +2,8 @@
 
 ## Pasos para levantar la aplicación
 
+> WARNING! Dependiendo de qué versión de docker compose tengáis os puede dar problemas al ejecutar el comando `npm run docker:up`. Si tenéis algún error hay que cambiar el comando del *package.json* de *docker:up* por: `docker compose --env-file ./.env up -d --build`
+
 > **El .env está en el repositorio para facilitaros la vida y que no tengáis que crearlo.**
 
 Clonar el repositorio de GitHub
