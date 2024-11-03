@@ -25,6 +25,7 @@ import { MessageMapper } from './Infrastructure/Persistance/Mappers/MessageMappe
 import { GetMessagesHandler } from './Application/GetMessages/GetMessagesHandler';
 import { GetMessagesController } from './Infrastructure/Controllers/GetMessages/GetMessagesController';
 import { SaveNotificationHandler } from './Application/SaveNotification/SaveNotificationHandler';
+import { UuidService } from './Domain/Services/UuidService';
 
 const controllers = [
   CreateUserController,
@@ -61,7 +62,7 @@ const repositories = [
 
 const mappers = [UserMapper, MessageMapper];
 
-const services = [CryptoService];
+const services = [CryptoService, UuidService];
 
 @Module({
   imports: [

@@ -6,6 +6,8 @@ import { GetUserResponse } from '../GetUser/GetUserResponse';
 import { GetUserHandler } from '../GetUser/GetUserHandler';
 import { UnableToSendMessageToInactiveUserError } from 'src/Domain/Errors/UnableToSendMessageToInactiveUserError';
 import { Message } from 'src/Domain/Entities/Message';
+import { SaveNotificationHandler } from '../SaveNotification/SaveNotificationHandler';
+import { UuidService } from 'src/Domain/Services/UuidService';
 
 @Injectable()
 export class SaveMessageHandler {
@@ -13,6 +15,8 @@ export class SaveMessageHandler {
     @Inject(MESSAGES_REPOSITORY)
     private readonly repository: IMessageRepository,
     private readonly getUserHandler: GetUserHandler,
+    private readonly saveNotificationHandler: SaveNotificationHandler,
+    private readonly uuid: UuidService,
   ) {}
 
   public async execute(dto: SaveMessageDto): Promise<void> {
@@ -32,6 +36,14 @@ export class SaveMessageHandler {
     );
 
     await this.repository.save(message);
+
+    const notification = {
+      id: this.uuid.generate(),
+      messageId: message.id(),
+      receiverId: message.receiverId(),
+    };
+
+    await this.saveNotificationHandler.execute(notification);
   }
 
   private async getUser(id: string): Promise<GetUserResponse> {
