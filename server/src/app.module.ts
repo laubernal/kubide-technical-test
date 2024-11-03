@@ -29,6 +29,7 @@ import { UuidService } from './Domain/Services/UuidService';
 import { GetNotificationsHandler } from './Application/GetNotifications/GetNotificationsHandler';
 import { GetNotificationsController } from './Infrastructure/Controllers/GetNotifications/GetNotificationsController';
 import { NotificationModel } from './Infrastructure/Persistance/Models/NotificationModel';
+import { NotificationMapper } from './Infrastructure/Persistance/Mappers/NotificationMapper';
 
 const controllers = [
   CreateUserController,
@@ -65,7 +66,7 @@ const repositories = [
   },
 ];
 
-const mappers = [UserMapper, MessageMapper];
+const mappers = [UserMapper, MessageMapper, NotificationMapper];
 
 const services = [CryptoService, UuidService];
 
