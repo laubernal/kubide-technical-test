@@ -96,6 +96,8 @@ const models = [UserModel, MessageModel, NotificationModel];
         entities: models,
         synchronize: false,
         logging: false,
+        migrations: ['./dist/typeorm/migrations/*{.ts,.js}'],
+        migrationsRun: true,
       }),
       inject: [ConfigService],
     }),

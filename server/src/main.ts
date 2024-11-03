@@ -14,7 +14,7 @@ async function bootstrap() {
 
   const typeorm = app.get(DataSource);
 
-  typeorm.runMigrations();
+  await typeorm.runMigrations();
 
   const options = new DocumentBuilder()
     .setTitle('Kubide technical test swagger documentation')
