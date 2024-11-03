@@ -7,9 +7,14 @@ import {
   NOTIFICATIONS_SWAGGER_TAG,
   USERS_SWAGGER_TAG,
 } from './Constants';
+import { DataSource } from 'typeorm';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  const typeorm = app.get(DataSource);
+
+  typeorm.runMigrations();
 
   const options = new DocumentBuilder()
     .setTitle('Kubide technical test swagger documentation')

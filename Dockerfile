@@ -12,7 +12,9 @@ COPY ./server/nest-cli.json .
 
 COPY ./server/src src
 
-COPY ./server/.env src/
+COPY ./server/.env .
+
+COPY ./server/typeorm typeorm
 
 RUN npm run build
 
