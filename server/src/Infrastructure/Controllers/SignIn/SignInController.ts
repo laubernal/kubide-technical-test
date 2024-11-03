@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { KubideApiResponse } from 'src/KubideApiResponse';
 import { SignInHandler } from 'src/Application/SignIn/SignInHandler';
@@ -26,9 +26,9 @@ export class SignInController {
 
   @Post('/api/auth/signin')
   @ApiOperation({ summary: 'Sign in' })
-  @ApiResponse({ status: 404, description: 'User not found' })
-  @ApiResponse({ status: 400, description: 'Invalid credentials' })
-  @ApiResponse({ status: 200, description: 'Signed in succesfully' })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
+  @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'Invalid credentials' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Signed in succesfully' })
   public async post(
     @Body() body: SignInRequest,
     @Res() res: Response,
@@ -51,7 +51,7 @@ export class SignInController {
       );
 
       return res
-        .status(200)
+        .status(HttpStatus.OK)
         .setHeader('Authorization', `Bearer ${token}`)
         .json(response);
     } catch (error: any) {
@@ -60,17 +60,15 @@ export class SignInController {
         error: error.message,
       });
 
-      let statusCode = 400;
-
       if (error instanceof RecordNotFoundError) {
-        statusCode = 404;
+        return res.status(HttpStatus.NOT_FOUND).json(errorResponse);
       }
 
       if (error instanceof InvalidCredentialsError) {
-        statusCode = 400;
+        return res.status(HttpStatus.BAD_REQUEST).json(errorResponse);
       }
 
-      return res.status(statusCode).json(errorResponse);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(errorResponse);
     }
   }
 }

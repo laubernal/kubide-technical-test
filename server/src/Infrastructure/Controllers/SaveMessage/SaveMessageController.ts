@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -21,10 +21,10 @@ export class SaveMessageController {
   @Post('/api/messages')
   @ApiOperation({ summary: 'Save a message' })
   @ApiResponse({
-    status: 400,
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
     description: 'Unable to send message to inactive user',
   })
-  @ApiResponse({ status: 200, description: 'Message saved succesfully' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'Message saved succesfully' })
   public async post(
     @Body() body: SaveMessageRequest,
     @Res() res: Response,
@@ -37,20 +37,18 @@ export class SaveMessageController {
         error: null,
       });
 
-      return res.status(200).json(response);
+      return res.status(HttpStatus.OK).json(response);
     } catch (error: any) {
       const errorResponse = new KubideApiResponse(null, {
         success: false,
         error: error.message,
       });
 
-      let statusCode = 400;
-
       if (error instanceof UnableToSendMessageToInactiveUserError) {
-        statusCode = 400;
+        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(errorResponse);
       }
 
-      return res.status(statusCode).json(errorResponse);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(errorResponse);
     }
   }
 }

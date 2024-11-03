@@ -1,4 +1,11 @@
-import { Controller, Get, Param, Res, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { KubideApiResponse } from 'src/KubideApiResponse';
 import {
@@ -22,9 +29,15 @@ export class GetUserController {
   @UseGuards(AuthGuard)
   @Get('/api/users/:id')
   @ApiOperation({ summary: 'Get a user' })
-  @ApiResponse({ status: 404, description: 'User not found' })
-  @ApiResponse({ status: 403, description: 'Forbidden resource' })
-  @ApiResponse({ status: 200, description: 'User retrieved succesfully' })
+  @ApiResponse({ status: HttpStatus.NOT_FOUND, description: 'User not found' })
+  @ApiResponse({
+    status: HttpStatus.FORBIDDEN,
+    description: 'Forbidden resource',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'User retrieved succesfully',
+  })
   public async get(
     @Param() params: GetUserParams,
     @Res() res: Response,
@@ -37,20 +50,18 @@ export class GetUserController {
         error: null,
       });
 
-      return res.status(200).json(response);
+      return res.status(HttpStatus.OK).json(response);
     } catch (error: any) {
       const errorResponse = new KubideApiResponse(null, {
         success: false,
         error: error.message,
       });
 
-      let statusCode = 400;
-
       if (error instanceof RecordNotFoundError) {
-        statusCode = 404;
+        return res.status(HttpStatus.NOT_FOUND).json(errorResponse);
       }
 
-      return res.status(statusCode).json(errorResponse);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(errorResponse);
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { KubideApiResponse } from 'src/KubideApiResponse';
 import { CreateUserRequest } from './CreateUserRequest';
@@ -20,8 +20,8 @@ export class CreateUserController {
 
   @Post('/api/auth/register')
   @ApiOperation({ summary: 'Create a user' })
-  @ApiResponse({ status: 400, description: 'User already exists' })
-  @ApiResponse({ status: 200, description: 'User created succesfully' })
+  @ApiResponse({ status: HttpStatus.BAD_REQUEST, description: 'User already exists' })
+  @ApiResponse({ status: HttpStatus.OK, description: 'User created succesfully' })
   public async post(
     @Body() body: CreateUserRequest,
     @Res() res: Response,
@@ -34,20 +34,18 @@ export class CreateUserController {
         error: null,
       });
 
-      return res.status(200).json(response);
+      return res.status(HttpStatus.OK).json(response);
     } catch (error: any) {
       const errorResponse = new KubideApiResponse(null, {
         success: false,
         error: error.message,
       });
 
-      let statusCode = 400;
-
       if (error instanceof UserAlreadyExistsError) {
-        statusCode = 400;
+        return res.status(HttpStatus.BAD_REQUEST).json(errorResponse);
       }
 
-      return res.status(statusCode).json(errorResponse);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(errorResponse);
     }
   }
 }

@@ -3,6 +3,7 @@ import {
   Get,
   Head,
   Headers,
+  HttpStatus,
   Param,
   Req,
   Res,
@@ -32,9 +33,9 @@ export class GetNotificationsController {
   @UseGuards(AuthGuard)
   @Get('/api/notifications/:userId')
   @ApiOperation({ summary: 'Get notifications from a user' })
-  @ApiResponse({ status: 403, description: 'Forbidden resource' })
+  @ApiResponse({ status: HttpStatus.FORBIDDEN, description: 'Forbidden resource' })
   @ApiResponse({
-    status: 200,
+    status: HttpStatus.OK,
     description: 'Notifications retrieved succesfully',
   })
   public async get(
@@ -49,14 +50,14 @@ export class GetNotificationsController {
         error: null,
       });
 
-      return res.status(200).json(response);
+      return res.status(HttpStatus.OK).json(response);
     } catch (error: any) {
       const errorResponse = new KubideApiResponse(null, {
         success: false,
         error: error.message,
       });
 
-      return res.status(400).json(errorResponse);
+      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(errorResponse);
     }
   }
 }
