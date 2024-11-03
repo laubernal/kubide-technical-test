@@ -15,11 +15,12 @@ export class PgMessageRepository implements IMessageRepository {
   ) {}
 
   public async findByUserId(id: string): Promise<Message[]> {
-    const models = await this.messagesRepository
-      .createQueryBuilder('messages')
-      .where('messages.sender = :id', { id })
-      .orWhere('messages.receiver = :id', { id })
-      .getMany();
+    const models = await this.messagesRepository.find({
+      where: [{ sender: id }, { receiver: id }],
+      order: {
+        createdAt: 'DESC',
+      },
+    });
 
     return models.map((model: MessageModel) => {
       return this.mapper.toDomain(model);

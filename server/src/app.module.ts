@@ -23,6 +23,7 @@ import { MessageModel } from './Infrastructure/Persistance/Models/MessageModel';
 import { PgMessageRepository } from './Infrastructure/Persistance/Repositories/PgMessageRepository';
 import { MessageMapper } from './Infrastructure/Persistance/Mappers/MessageMapper';
 import { GetMessagesHandler } from './Application/GetMessages/GetMessagesHandler';
+import { GetMessagesController } from './Infrastructure/Controllers/GetMessages/GetMessagesController';
 
 const controllers = [
   CreateUserController,
@@ -32,6 +33,7 @@ const controllers = [
   ActivateUserController,
   GetActiveUsersController,
   SaveMessageController,
+  GetMessagesController,
 ];
 
 const handlers = [
@@ -73,6 +75,7 @@ const services = [CryptoService];
         database: configService.get('DATABASE_NAME'),
         entities: [UserModel, MessageModel],
         synchronize: false,
+        logging: false,
       }),
       inject: [ConfigService],
     }),

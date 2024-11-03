@@ -30,12 +30,6 @@ export class UserModel {
   @Column({ name: 'us_is_active' })
   is_active!: boolean;
 
-  @OneToMany(() => MessageModel, (message) => message.sender)
-  sent_messages: MessageModel[];
-
-  @OneToMany(() => MessageModel, (message) => message.receiver)
-  received_messages: MessageModel[];
-
   @Column({ name: 'us_created_at', type: 'timestamp', precision: 0 })
   createdAt!: Date;
 

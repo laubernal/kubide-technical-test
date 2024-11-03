@@ -1,5 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
-import { UserModel } from './UserModel';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity({ name: 'messages' })
 export class MessageModel {
@@ -9,12 +8,10 @@ export class MessageModel {
   })
   id!: string;
 
-  @ManyToOne(() => UserModel, (user) => user.sent_messages)
-  @JoinColumn({ name: 'me_sender_id' })
+  @Column({ name: 'me_sender_id' })
   sender: string;
 
-  @ManyToOne(() => UserModel, (user) => user.received_messages)
-  @JoinColumn({ name: 'me_receiver_id' })
+  @Column({ name: 'me_receiver_id' })
   receiver: string;
 
   @Column({
